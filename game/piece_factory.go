@@ -17,7 +17,7 @@ func NewPieceFactory() *PieceFactory {
 
 func (pf *PieceFactory) Create(pType types.PieceType, pColor types.PieceColor) PieceInterface {
 	switch pType {
-	case types.King:
+	case types.KING:
 		return &king{
 			Piece: &Piece{
 				Type:    pType,
@@ -25,15 +25,15 @@ func (pf *PieceFactory) Create(pType types.PieceType, pColor types.PieceColor) P
 				Texture: pf.tf.CreateTexture(pType, pColor),
 			},
 		}
-	case types.Queen:
-		return &queen{
+	case types.QUEEN:
+		return &Queen{
 			Piece: &Piece{
 				Type:    pType,
 				Color:   pColor,
 				Texture: pf.tf.CreateTexture(pType, pColor),
 			},
 		}
-	case types.Rook:
+	case types.ROOK:
 		return &rook{
 			Piece: &Piece{
 				Type:    pType,
@@ -42,7 +42,7 @@ func (pf *PieceFactory) Create(pType types.PieceType, pColor types.PieceColor) P
 			},
 			hasMoved: false,
 		}
-	case types.Knight:
+	case types.KNIGHT:
 		return &knight{
 			Piece: &Piece{
 				Type:    pType,
@@ -50,15 +50,15 @@ func (pf *PieceFactory) Create(pType types.PieceType, pColor types.PieceColor) P
 				Texture: pf.tf.CreateTexture(pType, pColor),
 			},
 		}
-	case types.Bishop:
-		return &bishop{
+	case types.BISHOP:
+		return &Bishop{
 			Piece: &Piece{
 				Type:    pType,
 				Color:   pColor,
 				Texture: pf.tf.CreateTexture(pType, pColor),
 			},
 		}
-	case types.Pawn:
+	case types.PAWN:
 		return &pawn{
 			Piece: &Piece{
 				Type:    pType,

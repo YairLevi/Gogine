@@ -1,9 +1,13 @@
 package game
 
 import (
-	"fmt"
 	"github.com/gen2brain/raylib-go/raylib"
 	"main/types"
+)
+
+var (
+	light = rl.NewColor(227, 193, 111, 255)
+	dark  = rl.NewColor(184, 139, 74, 255)
 )
 
 type ChessBoard = [8][8]PieceInterface
@@ -19,24 +23,24 @@ type Game struct {
 
 var (
 	initPieces = [8][8]types.PieceType{
-		{types.Rook, types.Knight, types.Bishop, types.Queen, types.King, types.Bishop, types.Knight, types.Rook},
-		{types.Pawn, types.Pawn, types.Pawn, types.Pawn, types.Pawn, types.Pawn, types.Pawn, types.Pawn},
+		{types.ROOK, types.KNIGHT, types.BISHOP, types.QUEEN, types.KING, types.BISHOP, types.KNIGHT, types.ROOK},
+		{types.PAWN, types.PAWN, types.PAWN, types.PAWN, types.PAWN, types.PAWN, types.PAWN, types.PAWN},
 		{},
 		{},
 		{},
 		{},
-		{types.Pawn, types.Pawn, types.Pawn, types.Pawn, types.Pawn, types.Pawn, types.Pawn, types.Pawn},
-		{types.Rook, types.Knight, types.Bishop, types.Queen, types.King, types.Bishop, types.Knight, types.Rook},
+		{types.PAWN, types.PAWN, types.PAWN, types.PAWN, types.PAWN, types.PAWN, types.PAWN, types.PAWN},
+		{types.ROOK, types.KNIGHT, types.BISHOP, types.QUEEN, types.KING, types.BISHOP, types.KNIGHT, types.ROOK},
 	}
 	initColors = [8][8]types.PieceColor{
-		{types.Black, types.Black, types.Black, types.Black, types.Black, types.Black, types.Black, types.Black},
-		{types.Black, types.Black, types.Black, types.Black, types.Black, types.Black, types.Black, types.Black},
+		{types.BLACK, types.BLACK, types.BLACK, types.BLACK, types.BLACK, types.BLACK, types.BLACK, types.BLACK},
+		{types.BLACK, types.BLACK, types.BLACK, types.BLACK, types.BLACK, types.BLACK, types.BLACK, types.BLACK},
 		{},
 		{},
 		{},
 		{},
-		{types.White, types.White, types.White, types.White, types.White, types.White, types.White, types.White},
-		{types.White, types.White, types.White, types.White, types.White, types.White, types.White, types.White},
+		{types.WHITE, types.WHITE, types.WHITE, types.WHITE, types.WHITE, types.WHITE, types.WHITE, types.WHITE},
+		{types.WHITE, types.WHITE, types.WHITE, types.WHITE, types.WHITE, types.WHITE, types.WHITE, types.WHITE},
 	}
 )
 
@@ -46,7 +50,7 @@ func move(pieceI PieceInterface, boardState *ChessBoard) OnMoveCallback {
 	}
 }
 
-func NewGame(posX, posY, tileSize int, light, dark rl.Color) *Game {
+func NewGame(posX, posY, tileSize int) *Game {
 	factory := NewPieceFactory()
 	dragManager := &DragManager{DraggedPiece: nil}
 	boardState := &ChessBoard{}
@@ -55,7 +59,6 @@ func NewGame(posX, posY, tileSize int, light, dark rl.Color) *Game {
 		for col := 0; col < 8; col++ {
 			pType, pColor := initPieces[row][col], initColors[row][col]
 			pi := factory.Create(pType, pColor)
-			fmt.Println(row, col, pType, pi)
 			if pi == nil {
 				boardState[row][col] = nil
 				continue

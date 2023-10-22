@@ -22,22 +22,22 @@ func NewTextureFactory() *TextureFactory {
 func (factory *TextureFactory) CreateTexture(pType types.PieceType, pColor types.PieceColor) *Texture {
 	var colInSpriteSheet int
 	switch pType {
-	case types.King:
+	case types.KING:
 		colInSpriteSheet = 0
-	case types.Queen:
+	case types.QUEEN:
 		colInSpriteSheet = 1
-	case types.Bishop:
+	case types.BISHOP:
 		colInSpriteSheet = 2
-	case types.Knight:
+	case types.KNIGHT:
 		colInSpriteSheet = 3
-	case types.Rook:
+	case types.ROOK:
 		colInSpriteSheet = 4
-	case types.Pawn:
+	case types.PAWN:
 		colInSpriteSheet = 5
 	}
 
 	rowInSpriteSheet := 0
-	if pColor == types.Black {
+	if pColor == types.BLACK {
 		rowInSpriteSheet = 1
 	}
 

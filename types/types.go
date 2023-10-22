@@ -4,14 +4,14 @@ type PieceColor int
 type PieceType int
 
 const (
-	White PieceColor = iota
-	Black
+	WHITE PieceColor = iota
+	BLACK
 )
 const (
-	Pawn PieceType = iota + 1
-	Bishop
-	Knight
-	Rook
-	Queen
-	King
+	PAWN PieceType = iota + 1
+	BISHOP
+	KNIGHT
+	ROOK
+	QUEEN
+	KING
 )

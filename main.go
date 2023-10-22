@@ -2,8 +2,7 @@ package main
 
 import (
 	"github.com/gen2brain/raylib-go/raylib"
-	game2 "main/game"
-	"main/textures"
+	"main/animation"
 )
 
 const (
@@ -12,9 +11,8 @@ const (
 	WindowTitle  = "Chess"
 )
 
-var (
-	LightSquareColor = rl.NewColor(227, 193, 111, 255)
-	DarkSquareColor  = rl.NewColor(184, 139, 74, 255)
+const (
+	GroundSize = 400
 )
 
 func main() {
@@ -22,15 +20,26 @@ func main() {
 	defer rl.CloseWindow()
 
 	rl.SetTargetFPS(60)
+	rl.SetWindowState(rl.FlagWindowResizable)
 
-	game := game2.NewGame(0, 0, textures.TileSize, LightSquareColor, DarkSquareColor)
+	walking := animation.ExampleDinoWalkingAnimation()
+	running := animation.ExampleDinoRunningAnimation()
+	sprinting := animation.ExampleDinoSprintingAnimation()
 
 	for !rl.WindowShouldClose() {
 		rl.BeginDrawing()
-		rl.ClearBackground(rl.SkyBlue)
+		{
+			rl.ClearBackground(rl.SkyBlue)
+			rl.DrawRectangle(0, WindowHeight-GroundSize, WindowWidth, GroundSize, rl.Brown)
+			walking.Update()
+			walking.Render()
 
-		game.Run()
+			running.Update()
+			running.Render()
 
+			sprinting.Update()
+			sprinting.Render()
+		}
 		rl.EndDrawing()
 	}
 }

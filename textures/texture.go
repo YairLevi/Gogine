@@ -31,3 +31,7 @@ func (t *Texture) Draw(posX, posY float32) {
 	t.Dest.Y = posY
 	rl.DrawTexturePro(t.Sheet, t.Src, t.Dest, rl.Vector2{}, 0, rl.White)
 }
+
+func (t *Texture) Unload() {
+	rl.UnloadTexture(t.Sheet)
+}
